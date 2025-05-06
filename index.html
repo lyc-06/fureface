@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FureFace - 高端面部美学优化平台</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- 照片上传区域 -->
+    <section class="upload-section" id="uploadSection">
+        <div class="container">
+            <h2>上传照片</h2>
+            <div class="upload-guide">
+                <div class="guide-image">
+                    <img src="assets/guide-front.jpg" alt="正面拍摄指南">
+                    <img src="assets/guide-side.jpg" alt="侧面拍摄指南">
+                </div>
+                <div class="guide-text">
+                    <h3>拍摄要求</h3>
+                    <ul>
+                        <li>光线充足，面部清晰可见</li>
+                        <li>保持自然表情，无妆面</li>
+                        <li>头发不遮挡面部</li>
+                        <li>保持适当距离，确保面部完整入镜</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="upload-area">
+                <div class="upload-box" id="frontUpload">
+                    <input type="file" id="frontPhoto" accept="image/*" hidden>
+                    <div class="upload-placeholder">
+                        <i class="fas fa-camera"></i>
+                        <p>上传正面照片</p>
+                    </div>
+                    <div class="preview-container" hidden>
+                        <img id="frontPreview" src="" alt="正面照片预览">
+                        <button class="reupload-btn">重新上传</button>
+                    </div>
+                </div>
+                <div class="upload-box" id="sideUpload">
+                    <input type="file" id="sidePhoto" accept="image/*" hidden>
+                    <div class="upload-placeholder">
+                        <i class="fas fa-camera"></i>
+                        <p>上传侧面照片</p>
+                    </div>
+                    <div class="preview-container" hidden>
+                        <img id="sidePreview" src="" alt="侧面照片预览">
+                        <button class="reupload-btn">重新上传</button>
+                    </div>
+                </div>
+            </div>
+            <div class="progress-container" hidden>
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <p class="progress-text">正在分析中...</p>
+            </div>
+            <button class="analyze-button" id="analyzeButton" disabled>开始分析</button>
+        </div>
+    </section>
+
+    <!-- AI分析结果展示区 -->
+    <section class="analysis-section" id="analysisSection" hidden>
+        <div class="container">
+            <h2>分析结果</h2>
+            <div class="analysis-report">
+                <div class="report-summary">
+                    <div class="facial-proportions">
+                        <h3>面部比例评估</h3>
+                        <div class="golden-ratio-chart"></div>
+                    </div>
+                    <div class="symmetry-analysis">
+                        <h3>面部对称性分析</h3>
+                        <div class="symmetry-chart"></div>
+                    </div>
+                </div>
+                <div class="detailed-analysis">
+                    <button class="toggle-details">查看详细分析</button>
+                    <div class="details-content" hidden>
+                        <!-- 详细分析内容将通过JavaScript动态填充 -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 整容方案推荐区 -->
+            <div class="surgery-recommendations">
+                <h3>个性化整容方案推荐</h3>
+                <div class="recommendation-grid">
+                    <!-- 方案卡片将通过JavaScript动态填充 -->
+                </div>
+            </div>
+
+            <!-- 方案效果预览区 -->
+            <div class="simulation-showcase">
+                <h3>方案效果预览</h3>
+                <div class="simulation-grid">
+                    <div class="simulation-card">
+                        <div class="simulation-image">
+                            <img src="assets/simulation/plan1.jpg" alt="方案一效果">
+                        </div>
+                        <div class="simulation-info">
+                            <h4>面部轮廓优化</h4>
+                            <p>打造完美V型脸，提升面部立体感</p>
+                        </div>
+                    </div>
+                    <div class="simulation-card">
+                        <div class="simulation-image">
+                            <img src="assets/simulation/plan2.jpg" alt="方案二效果">
+                        </div>
+                        <div class="simulation-info">
+                            <h4>五官精致化</h4>
+                            <p>优化五官比例，提升面部协调性</p>
+                        </div>
+                    </div>
+                    <div class="simulation-card">
+                        <div class="simulation-image">
+                            <img src="assets/simulation/plan3.jpg" alt="方案三效果">
+                        </div>
+                        <div class="simulation-info">
+                            <h4>面部年轻化</h4>
+                            <p>改善面部松弛，恢复年轻态</p>
+                        </div>
+                    </div>
+                    <div class="simulation-card">
+                        <div class="simulation-image">
+                            <img src="assets/simulation/plan4.jpg" alt="方案四效果">
+                        </div>
+                        <div class="simulation-info">
+                            <h4>综合美颜</h4>
+                            <p>全方位改善，打造自然和谐美感</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 方案模拟与对比区 -->
+    <section class="simulation-section" id="simulationSection" hidden>
+        <div class="container">
+            <h2>美容方案模拟</h2>
+            
+            <!-- 方案选择面板 -->
+            <div class="simulation-controls">
+                <div class="plan-selector">
+                    <h3>选择方案</h3>
+                    <div class="plan-buttons">
+                        <button class="plan-button active" data-plan="plan1">面部轮廓优化</button>
+                        <button class="plan-button" data-plan="plan2">五官精致化</button>
+                        <button class="plan-button" data-plan="plan3">面部年轻化</button>
+                        <button class="plan-button" data-plan="plan4">综合美颜</button>
+                    </div>
+                </div>
+                
+                <!-- 参数控制面板 -->
+                <div class="parameter-controls">
+                    <h3>调整参数</h3>
+                    <div class="parameter-group">
+                        <label>方案强度</label>
+                        <input type="range" min="0" max="100" value="50" class="parameter-slider" id="intensitySlider">
+                        <span class="parameter-value">50%</span>
+                    </div>
+                    <div class="parameter-group">
+                        <label>自然度</label>
+                        <input type="range" min="0" max="100" value="70" class="parameter-slider" id="naturalSlider">
+                        <span class="parameter-value">70%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 预览窗口 -->
+            <div class="preview-window">
+                <div class="preview-controls">
+                    <button class="preview-button active" data-view="split">分割对比</button>
+                    <button class="preview-button" data-view="switch">切换对比</button>
+                    <button class="preview-button" data-view="multi">多方案对比</button>
+                </div>
+
+                <!-- 分割对比视图 -->
+                <div class="comparison-view split-view active">
+                    <div class="original-view">
+                        <h3>原始照片</h3>
+                        <div class="image-container">
+                            <img src="assets/guide1.jpg" alt="原始照片">
+                        </div>
+                    </div>
+                    <div class="simulated-view">
+                        <h3>模拟效果</h3>
+                        <div class="image-container">
+                            <img src="assets/guide2.jpg" alt="模拟效果">
+                        </div>
+                    </div>
+                    <div class="comparison-slider">
+                        <div class="slider-handle"></div>
+                    </div>
+                </div>
+
+                <!-- 切换对比视图 -->
+                <div class="comparison-view switch-view">
+                    <div class="image-container">
+                        <img src="assets/guide1.jpg" alt="对比照片" class="switch-image">
+                    </div>
+                    <div class="switch-overlay">
+                        <span>点击切换</span>
+                    </div>
+                </div>
+
+                <!-- 多方案对比视图 -->
+                <div class="comparison-view multi-view">
+                    <div class="multi-comparison">
+                        <div class="comparison-item">
+                            <h4>方案一</h4>
+                            <div class="image-container">
+                                <img src="assets/guide1.jpg" alt="方案一">
+                            </div>
+                        </div>
+                        <div class="comparison-item">
+                            <h4>方案二</h4>
+                            <div class="image-container">
+                                <img src="assets/guide2.jpg" alt="方案二">
+                            </div>
+                        </div>
+                        <div class="comparison-item">
+                            <h4>方案三</h4>
+                            <div class="image-container">
+                                <img src="assets/guide1.jpg" alt="方案三">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 方案详情 -->
+            <div class="plan-details">
+                <div class="details-tabs">
+                    <button class="tab-button active" data-tab="description">方案说明</button>
+                    <button class="tab-button" data-tab="medical">医学解释</button>
+                    <button class="tab-button" data-tab="risks">风险提示</button>
+                </div>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="description">
+                        <h4>方案说明</h4>
+                        <p>本方案通过精确的面部轮廓调整，为您打造完美的面部线条。采用先进的微创技术，确保手术效果自然持久。</p>
+                    </div>
+                    <div class="tab-pane" id="medical">
+                        <h4>医学解释</h4>
+                        <p>手术采用局部麻醉，通过微创切口进行面部轮廓调整。手术时间约2-3小时，恢复期约1-2周。</p>
+                    </div>
+                    <div class="tab-pane" id="risks">
+                        <h4>风险提示</h4>
+                        <ul>
+                            <li>可能出现暂时性肿胀和淤青</li>
+                            <li>极少数情况下可能出现感染</li>
+                            <li>需要严格遵医嘱进行术后护理</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 操作按钮 -->
+            <div class="action-buttons">
+                <button class="save-results">
+                    <i class="fas fa-download"></i>
+                    保存结果
+                </button>
+                <button class="share-results">
+                    <i class="fas fa-share-alt"></i>
+                    分享结果
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 建议与咨询区 -->
+    <section class="consultation-section" id="consultationSection">
+        <div class="container">
+            <div class="disclaimer">
+                <h3>免责声明</h3>
+                <p>本系统提供的分析结果和模拟效果仅供参考，实际效果可能因个人情况而异。建议在实施任何美容方案前咨询专业医师。</p>
+            </div>
+            <div class="faq">
+                <h3>常见问题</h3>
+                <div class="faq-list">
+                    <!-- FAQ内容将通过JavaScript动态填充 -->
+                </div>
+            </div>
+            <div class="professional-consultation">
+                <h3>专业咨询建议</h3>
+                <p>我们的系统可以为您提供初步分析，但为了确保安全和效果，我们建议您：</p>
+                <ul>
+                    <li>咨询专业医师进行面对面评估</li>
+                    <li>了解具体方案的详细风险和注意事项</li>
+                    <li>根据个人情况制定个性化方案</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© 2024 AI面部特征分析系统 - 专业医疗美容解决方案</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 

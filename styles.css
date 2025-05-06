@@ -1,0 +1,474 @@
+:root {
+    --primary-color: #056bd9;
+    --secondary-color: #4CAF50;
+    --text-primary: #333333;
+    --text-secondary: #666666;
+    --background-light: #FFFFFF;
+    --background-gray: #F5F5F5;
+    --border-color: #E0E0E0;
+    --shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans SC', sans-serif;
+    line-height: 1.6;
+    color: var(--text-primary);
+    background-color: var(--background-gray);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+
+
+/* 照片上传区域样式 */
+.upload-section {
+    padding: 60px 0;
+    background-color: var(--background-light);
+}
+
+.upload-guide {
+    display: flex;
+    gap: 40px;
+    margin: 40px 0;
+    align-items: center;
+}
+
+.guide-image {
+    flex: 1;
+    display: flex;
+    gap: 20px;
+}
+
+.guide-image img {
+    max-width: 200px;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+}
+
+.guide-text {
+    flex: 1;
+}
+
+.guide-text ul {
+    list-style: none;
+    margin-top: 1rem;
+}
+
+.guide-text li {
+    margin-bottom: 0.5rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.guide-text li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+}
+
+.upload-area {
+    display: flex;
+    gap: 30px;
+    margin: 40px 0;
+}
+
+.upload-box {
+    flex: 1;
+    border: 2px dashed var(--border-color);
+    border-radius: 10px;
+    padding: 30px;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition);
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.upload-box:hover {
+    border-color: var(--primary-color);
+}
+
+.upload-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.upload-placeholder i {
+    font-size: 2rem;
+    color: var(--primary-color);
+}
+
+.preview-container {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 8px;
+    background-color: #f8f8f8;
+}
+
+.preview-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.reupload-btn {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.reupload-btn:hover {
+    background: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.progress-container {
+    margin: 20px 0;
+}
+
+.progress-bar {
+    height: 6px;
+    background-color: var(--border-color);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: var(--primary-color);
+    width: 0;
+    transition: width 0.3s ease;
+}
+
+.analyze-button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+.analyze-button:disabled {
+    background-color: var(--border-color);
+    cursor: not-allowed;
+}
+
+/* 分析结果区域样式 */
+.analysis-section {
+    padding: 60px 0;
+    background-color: var(--background-light);
+}
+
+.analysis-report {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    padding: 30px;
+    margin-top: 30px;
+}
+
+.report-summary {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.toggle-details {
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 10px 0;
+}
+
+/* 建议与咨询区域样式 */
+.consultation-section {
+    padding: 60px 0;
+    background-color: var(--background-gray);
+}
+
+.disclaimer {
+    background-color: #FFF3E0;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+.faq {
+    margin-bottom: 40px;
+}
+
+.faq-list {
+    margin-top: 20px;
+}
+
+.professional-consultation {
+    background-color: var(--background-light);
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.professional-consultation ul {
+    list-style: none;
+    margin-top: 1rem;
+}
+
+.professional-consultation li {
+    margin-bottom: 0.5rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.professional-consultation li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--secondary-color);
+}
+
+/* 页脚样式 */
+.footer {
+    background-color: var(--text-primary);
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+/* 响应式设计 */
+@media (max-width: 820px) {
+    .image {
+        width: 4.0rem;
+        height: 19rem;
+    }
+
+    .image:hover {
+        width: 20vw;
+        transform: translateZ(7.375rem);
+    }
+
+    .english-description {
+        width: 90%;
+    }
+
+    .upload-guide {
+        flex-direction: column;
+    }
+
+    .upload-area {
+        flex-direction: column;
+    }
+
+    .report-summary {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* 整容方案推荐区样式 */
+.surgery-recommendations {
+    margin-top: 40px;
+}
+
+.recommendation-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.recommendation-card {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.recommendation-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.recommendation-card h4 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+.procedure-list {
+    list-style: none;
+    margin: 15px 0;
+}
+
+.procedure-list li {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.procedure-list li:last-child {
+    border-bottom: none;
+}
+
+.expected-results {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 2px solid var(--primary-color);
+    color: var(--text-secondary);
+}
+
+/* 方案效果预览区样式 */
+.simulation-showcase {
+    margin-top: 40px;
+    padding: 20px 0;
+}
+
+.simulation-showcase h3 {
+    text-align: center;
+    font-size: 24px;
+    color: var(--text-primary);
+    margin-bottom: 30px;
+}
+
+.simulation-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.simulation-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.simulation-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+.simulation-image {
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    position: relative;
+    cursor: zoom-in;
+    flex-shrink: 0;
+}
+
+.simulation-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+/* 放大镜效果 */
+.magnifier {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    border: 2px solid white;
+    border-radius: 50%;
+    pointer-events: none;
+    display: none;
+    background-repeat: no-repeat;
+    box-shadow: 0 0 0 7px rgba(255, 255, 255, 0.85),
+                0 0 7px 7px rgba(0, 0, 0, 0.25);
+}
+
+.simulation-image:hover .magnifier {
+    display: block;
+}
+
+.simulation-info {
+    padding: 15px;
+    background: white;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-height: 80px;
+}
+
+.simulation-info h4 {
+    font-size: 16px;
+    color: var(--primary-color);
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.simulation-info p {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .recommendation-grid,
+    .simulation-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .simulation-image {
+        height: 200px;
+    }
+
+    .simulation-info {
+        min-height: 70px;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .simulation-image {
+        height: 210px;
+    }
+
+    .simulation-info {
+        min-height: 75px;
+    }
+} 
