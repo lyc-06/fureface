@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <!-- 保持与登录页相同的head内容 -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册界面</title>
+    <link rel="stylesheet" href="login-register-styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+<body>
+<div id="page" class="site">
+    <div class="container">
+        <div class="login">
+            <div class="hero">
+                <h1>映  美<br>Fure Face</h1>
+                <p>已有账号？<br>立即<a href="login.html">登录账号</a></p>
+            </div>
+            <div class="main">
+                <form action="#">
+                    <p>
+                        <input type="text" placeholder="用户名" required>
+                    </p>
+                    <p>
+                        <input type="email" placeholder="邮箱" required>
+                    </p>
+                    <p class="password">
+                        <input type="password" placeholder="密码" required>
+                        <i class="ri-eye-off-line"></i>
+                    </p>
+                    <p class="password">
+                        <input type="password" placeholder="确认密码" required>
+                        <i class="ri-eye-off-line"></i>
+                        <span class="error-message"></span>
+                    </p>
+                    <p>
+                        <input type="submit" class="submit" value="立即注册">
+                    </p>
+                </form>
+                <div class="options">
+                    <div class="separator">
+                        <p>使用其他方式注册</p>
+                    </div>
+                    <ul>
+                        <li><a href="#"><i class="ri-wechat-fill ri-2x"></i></a></li>
+                        <li><a href="#"><i class="ri-qq-fill ri-2x"></i></a></li>
+                        <li><a href="#"><i class="ri-weibo-fill ri-2x"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="login-register-script.js"></script>
+</body>
+</html>
