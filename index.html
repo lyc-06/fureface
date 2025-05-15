@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FureFace - 高端面部美学优化平台</title>
+    <title>FureFace  映美</title>
     <link rel="stylesheet" href="styles/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-
     <!-- 照片上传区域 -->
     <section class="upload-section" id="uploadSection">
         <div class="container">
@@ -31,31 +30,29 @@
             </div>
             <div class="upload-area">
                 <div class="upload-box" id="frontUpload">
-                    <input type="file" id="frontPhoto" accept="image/*" hidden>
                     <div class="upload-placeholder">
-                        <i class="fas fa-camera"></i>
-                        <p>上传正面照片</p>
+                        <span>正面照片</span>
                     </div>
-                    <div class="preview-container" hidden>
-                        <img id="frontPreview" src="" alt="正面照片预览">
+                    <div class="preview-container" style="display: none;">
+                        <img id="frontPreview" src="" alt="正面预览">
                         <button class="reupload-btn">重新上传</button>
                     </div>
+                    <input type="file" id="frontInput" accept="image/*" style="display: none;">
                 </div>
                 <div class="upload-box" id="sideUpload">
-                    <input type="file" id="sidePhoto" accept="image/*" hidden>
                     <div class="upload-placeholder">
-                        <i class="fas fa-camera"></i>
-                        <p>上传侧面照片</p>
+                        <span>侧面照片</span>
                     </div>
-                    <div class="preview-container" hidden>
-                        <img id="sidePreview" src="" alt="侧面照片预览">
+                    <div class="preview-container" style="display: none;">
+                        <img id="sidePreview" src="" alt="侧面预览">
                         <button class="reupload-btn">重新上传</button>
                     </div>
+                    <input type="file" id="sideInput" accept="image/*" style="display: none;">
                 </div>
             </div>
-            <div class="progress-container" hidden>
+            <div class="progress-container" id="progressContainer" hidden>
                 <div class="progress-bar">
-                    <div class="progress-fill"></div>
+                    <div class="progress-fill" id="progressFill"></div>
                 </div>
                 <p class="progress-text">正在分析中...</p>
             </div>
@@ -70,68 +67,58 @@
             <div class="analysis-report">
                 <div class="report-summary">
                     <div class="facial-proportions">
-                        <h3>面部比例评估</h3>
-                        <div class="golden-ratio-chart"></div>
+                        <h3>面部比例评估</h2>
+                        <div class="analysis-content">
+                            <h4 style="color: #056bd9;">黄金比例偏差</h4>
+                            <p>从图片来看，面部五官分布较为协调。额头、中庭（鼻）、下庭（唇 - 下巴）比例无明显失调，与黄金比例偏差较小。</p>
+                            <h4 style="color: #056bd9;">面部轮廓指数</h4>
+                            <p>侧面轮廓线条柔和，下颌角角度自然，面部宽窄比例适中，整体轮廓流畅，符合大众审美标准。</p>
+                        </div>
                     </div>
                     <div class="symmetry-analysis">
                         <h3>面部对称性分析</h3>
-                        <div class="symmetry-chart"></div>
+                        <div class="analysis-content">
+                            <p>整体对称度：正面看面部整体对称度较好，无明显左右大小脸情况。</p>
+                            <div class="local-symmetry">
+                                <h4>局部对称度</h4>
+                                <ul>
+                                    <li>眼睛：双眼眼型、大小相似，间距适中，对称度高。</li>
+                                    <li>鼻子：鼻梁基本处于面部中轴线上，鼻翼两侧宽度无明显差异，对称度良好。</li>
+                                    <li>嘴巴：嘴角位置基本一致，唇部形态左右对称度尚可。</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="detailed-analysis">
-                    <button class="toggle-details">查看详细分析</button>
-                    <div class="details-content" hidden>
-                        <!-- 详细分析内容将通过JavaScript动态填充 -->
+                <div class="skin-analysis-section">
+                    <h3>肤质分析</h3>
+                    <div class="analysis-content">
+                        <div class="skin-metrics">
+                            <div class="metric-item">
+                                <h4>水分含量</h4>
+                                <p>从图片看，皮肤有一定光泽度，说明水分含量尚可，但局部可能因光线原因略显暗沉，整体水分分布可进一步优化。</p>
+                            </div>
+                            <div class="metric-item">
+                                <h4>弹性指数</h4>
+                                <p>面部皮肤未见明显松弛迹象，推测弹性指数正常。</p>
+                            </div>
+                            <div class="metric-item">
+                                <h4>肤色均匀度</h4>
+                                <p>存在一定程度的色斑，影响了肤色均匀度，是主要问题所在。</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- 整容方案推荐区 -->
-            <div class="surgery-recommendations">
-                <h3>个性化整容方案推荐</h3>
-                <div class="recommendation-grid">
-                    <!-- 方案卡片将通过JavaScript动态填充 -->
-                </div>
-            </div>
-
-            <!-- 方案效果预览区 -->
-            <div class="simulation-showcase">
-                <h3>方案效果预览</h3>
-                <div class="simulation-grid">
-                    <div class="simulation-card">
-                        <div class="simulation-image">
-                            <img src="assets/simulation/plan1.jpg" alt="方案一效果">
+                <div class="recommendations-section">
+                    <h3>个性化整容建议</h3>
+                    <div class="analysis-content">
+                        <div class="recommendation-item">
+                            <h4>非手术类</h4>
+                            <p>可定期进行美白、淡斑类的皮肤护理项目，如光子嫩肤、果酸换肤等，帮助改善色斑问题，提升肤色均匀度。日常加强防晒，防止色斑加深。</p>
                         </div>
-                        <div class="simulation-info">
-                            <h4>面部轮廓优化</h4>
-                            <p>打造完美V型脸，提升面部立体感</p>
-                        </div>
-                    </div>
-                    <div class="simulation-card">
-                        <div class="simulation-image">
-                            <img src="assets/simulation/plan2.jpg" alt="方案二效果">
-                        </div>
-                        <div class="simulation-info">
-                            <h4>五官精致化</h4>
-                            <p>优化五官比例，提升面部协调性</p>
-                        </div>
-                    </div>
-                    <div class="simulation-card">
-                        <div class="simulation-image">
-                            <img src="assets/simulation/plan3.jpg" alt="方案三效果">
-                        </div>
-                        <div class="simulation-info">
-                            <h4>面部年轻化</h4>
-                            <p>改善面部松弛，恢复年轻态</p>
-                        </div>
-                    </div>
-                    <div class="simulation-card">
-                        <div class="simulation-image">
-                            <img src="assets/simulation/plan4.jpg" alt="方案四效果">
-                        </div>
-                        <div class="simulation-info">
-                            <h4>综合美颜</h4>
-                            <p>全方位改善，打造自然和谐美感</p>
+                        <div class="recommendation-item">
+                            <h4>手术类（非必要）</h4>
+                            <p>若追求更精致的面部比例，可考虑对鼻部进行微调，如通过注射或手术方式适度增加鼻梁高度，让面部更具立体感。</p>
                         </div>
                     </div>
                 </div>
@@ -139,139 +126,266 @@
         </div>
     </section>
 
-    <!-- 方案模拟与对比区 -->
-    <section class="simulation-section" id="simulationSection" hidden>
+    <!-- 方案展示与模拟效果区 -->
+    <section class="plan-showcase-section" hidden>
         <div class="container">
-            <h2>美容方案模拟</h2>
+            <h2>方案展示与效果模拟</h2>
             
-            <!-- 方案选择面板 -->
-            <div class="simulation-controls">
-                <div class="plan-selector">
-                    <h3>选择方案</h3>
-                    <div class="plan-buttons">
-                        <button class="plan-button active" data-plan="plan1">面部轮廓优化</button>
-                        <button class="plan-button" data-plan="plan2">五官精致化</button>
-                        <button class="plan-button" data-plan="plan3">面部年轻化</button>
-                        <button class="plan-button" data-plan="plan4">综合美颜</button>
-                    </div>
-                </div>
-                
-                <!-- 参数控制面板 -->
-                <div class="parameter-controls">
-                    <h3>调整参数</h3>
-                    <div class="parameter-group">
-                        <label>方案强度</label>
-                        <input type="range" min="0" max="100" value="50" class="parameter-slider" id="intensitySlider">
-                        <span class="parameter-value">50%</span>
-                    </div>
-                    <div class="parameter-group">
-                        <label>自然度</label>
-                        <input type="range" min="0" max="100" value="70" class="parameter-slider" id="naturalSlider">
-                        <span class="parameter-value">70%</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 预览窗口 -->
-            <div class="preview-window">
-                <div class="preview-controls">
-                    <button class="preview-button active" data-view="split">分割对比</button>
-                    <button class="preview-button" data-view="switch">切换对比</button>
-                    <button class="preview-button" data-view="multi">多方案对比</button>
-                </div>
-
-                <!-- 分割对比视图 -->
-                <div class="comparison-view split-view active">
-                    <div class="original-view">
-                        <h3>原始照片</h3>
-                        <div class="image-container">
-                            <img src="assets/guide1.jpg" alt="原始照片">
-                        </div>
-                    </div>
-                    <div class="simulated-view">
-                        <h3>模拟效果</h3>
-                        <div class="image-container">
-                            <img src="assets/guide2.jpg" alt="模拟效果">
-                        </div>
-                    </div>
-                    <div class="comparison-slider">
-                        <div class="slider-handle"></div>
-                    </div>
-                </div>
-
-                <!-- 切换对比视图 -->
-                <div class="comparison-view switch-view">
-                    <div class="image-container">
-                        <img src="assets/guide1.jpg" alt="对比照片" class="switch-image">
-                    </div>
-                    <div class="switch-overlay">
-                        <span>点击切换</span>
-                    </div>
-                </div>
-
-                <!-- 多方案对比视图 -->
-                <div class="comparison-view multi-view">
-                    <div class="multi-comparison">
-                        <div class="comparison-item">
-                            <h4>方案一</h4>
-                            <div class="image-container">
-                                <img src="assets/guide1.jpg" alt="方案一">
+            <!-- 方案分类展示 -->
+            <div class="plan-categories">
+                <div class="plan-category">
+                    <h3>轻微调整方案</h3>
+                    <div class="plan-grid">
+                        <div class="plan-card">
+                            <div class="plan-image">
+                                <input type="checkbox" class="flip-toggle" id="flip-light-plan1" hidden>
+                                <!-- 图片位置：轻微调整-光子嫩肤效果图（整容后） -->
+                                <img src="assets/plans/light-plan1-after.jpg" alt="光子嫩肤效果" class="after-image">
+                                <!-- 图片位置：轻微调整-光子嫩肤效果图（整容前） -->
+                                <img src="assets/plans/light-plan1-before.jpg" alt="光子嫩肤前" class="before-image">
+                                <label class="flip-icon" for="flip-light-plan1">
+                                    <i class="fas fa-sync-alt"></i>
+                                </label>
+                            </div>
+                            <div class="plan-info">
+                                <h4>光子嫩肤改善雀斑</h4>
+                                <div class="plan-details">
+                                    <div class="detail-item">
+                                        <span class="label">预期效果</span>
+                                        <p>淡化面部雀斑，均匀肤色，让肌肤更光滑细腻。</p>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="label">风险等级</span>
+                                        <p>低。可能出现轻微红肿、色素沉着，但大多可自行消退。</p>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="label">恢复周期</span>
+                                        <p>3-7天，红肿消退，皮肤逐渐恢复正常。</p>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="label">费用范围</span>
+                                        <p>¥1,000-3,000元/次</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="comparison-item">
-                            <h4>方案二</h4>
-                            <div class="image-container">
-                                <img src="assets/guide2.jpg" alt="方案二">
+                        <div class="plan-card">
+                            <div class="plan-image">
+                                <input type="checkbox" class="flip-toggle" id="flip-light-plan2" hidden>
+                                <!-- 图片位置：轻微调整-眉形调整效果图（整容后） -->
+                                <img src="assets/plans/light-plan2-after.jpg" alt="眉形调整效果" class="after-image">
+                                <!-- 图片位置：轻微调整-眉形调整效果图（整容前） -->
+                                <img src="assets/plans/light-plan2-before.jpg" alt="眉形调整前" class="before-image">
+                                <label class="flip-icon" for="flip-light-plan2">
+                                    <i class="fas fa-sync-alt"></i>
+                                </label>
                             </div>
-                        </div>
-                        <div class="comparison-item">
-                            <h4>方案三</h4>
-                            <div class="image-container">
-                                <img src="assets/guide1.jpg" alt="方案三">
+                            <div class="plan-info">
+                                <h4>微调眉形</h4>
+                                <div class="plan-details">
+                                    <div class="detail-item">
+                                        <span class="label">预期效果</span>
+                                        <p>通过纹眉或绣眉，调整眉形，增强面部立体感和五官协调性。</p>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="label">风险等级</span>
+                                        <p>低。可能有轻微感染风险，选择正规机构可降低风险。</p>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="label">恢复周期</span>
+                                        <p>7-14天，结痂脱落，眉色自然。</p>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="label">费用范围</span>
+                                        <p>¥1,500-3,500元</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <div class="plan-category">
+                    <h3>中度改造方案</h3>
+                    <div class="plan-grid">
+                        <div class="plan-card">
+                            <div class="plan-image">
+                                <input type="checkbox" class="flip-toggle" id="flip-medium-plan1" hidden>
+                                <!-- 图片位置：中度改造-鼻部调整效果图（整容后） -->
+                                <img src="assets/plans/medium-plan1-after.jpg" alt="鼻部调整效果" class="after-image">
+                                <!-- 图片位置：中度改造-鼻部调整效果图（整容前） -->
+                                <img src="assets/plans/medium-plan1-before.jpg" alt="鼻部调整前" class="before-image">
+                                <label class="flip-icon" for="flip-medium-plan1">
+                                    <i class="fas fa-sync-alt"></i>
+                                </label>
+                            </div>
+                            <div class="plan-info">
+                                <h4>鼻部多项微调</h4>
+                                <div class="plan-details">
+                                    <div class="detail-item">
+                                        <span class="label">预期效果</span>
+                                        <p>适度抬高鼻梁，调整鼻翼宽度，使鼻部更立体精致，提升面部整体美感。</p>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="label">风险等级</span>
+                                        <p>中。存在感染、假体移位等风险，但发生概率较低。</p>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="label">恢复周期</span>
+                                        <p>1-3个月，肿胀逐渐消退，形态稳定。</p>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="label">费用范围</span>
+                                        <p>¥10,000-30,000元</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="plan-card">
+                            <div class="plan-image">
+                                <input type="checkbox" class="flip-toggle" id="flip-medium-plan2" hidden>
+                                <!-- 图片位置：中度改造-眼部手术效果图（整容后） -->
+                                <img src="assets/plans/medium-plan2-after.jpg" alt="眼部手术效果" class="after-image">
+                                <!-- 图片位置：中度改造-眼部手术效果图（整容前） -->
+                                <img src="assets/plans/medium-plan2-before.jpg" alt="眼部手术前" class="before-image">
+                                <label class="flip-icon" for="flip-medium-plan2">
+                                    <i class="fas fa-sync-alt"></i>
+                                </label>
+                            </div>
+                            <div class="plan-info">
+                                <h4>眼部多项手术（开眼角+眼睑下至）</h4>
+                                <div class="plan-details">
+                                    <div class="detail-item">
+                                        <span class="label">预期效果</span>
+                                        <p>增大眼裂，调整眼型，让眼睛更有神，改善眼部神态。</p>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="label">风险等级</span>
+                                        <p>中。有出血、感染、瘢痕增生等风险，需术后精心护理。</p>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="label">恢复周期</span>
+                                        <p>1-3个月，肿胀和淤血逐渐消失，眼部形态自然。</p>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="label">费用范围</span>
+                                        <p>¥8,000-20,000元</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="plan-category">
+                    <h3>重度改造方案</h3>
+                    <div class="plan-grid">
+                        <div class="plan-card">
+                            <div class="plan-image">
+                                <input type="checkbox" class="flip-toggle" id="flip-heavy-plan1" hidden>
+                                <!-- 图片位置：重度改造-下颌角手术效果图（整容后） -->
+                                <img src="assets/plans/heavy-plan1-after.jpg" alt="下颌角手术效果" class="after-image">
+                                <!-- 图片位置：重度改造-下颌角手术效果图（整容前） -->
+                                <img src="assets/plans/heavy-plan1-before.jpg" alt="下颌角手术前" class="before-image">
+                                <label class="flip-icon" for="flip-heavy-plan1">
+                                    <i class="fas fa-sync-alt"></i>
+                                </label>
+                            </div>
+                            <div class="plan-info">
+                                <h4>下颌角截骨手术</h4>
+                                <div class="plan-details">
+                                    <div class="detail-item">
+                                        <span class="label">预期效果</span>
+                                        <p>改善面部轮廓，使下颌线条更流畅，打造小V脸效果。</p>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="label">风险等级</span>
+                                        <p>高。存在出血、神经损伤、感染等严重风险，对医生技术要求极高。</p>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="label">恢复周期</span>
+                                        <p>3-6个月，初期肿胀明显，逐渐消肿后效果显现。</p>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="label">费用范围</span>
+                                        <p>¥30,000-80,000元</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="plan-card">
+                            <div class="plan-image">
+                                <input type="checkbox" class="flip-toggle" id="flip-heavy-plan2" hidden>
+                                <!-- 图片位置：重度改造-颧骨手术效果图（整容后） -->
+                                <img src="assets/plans/heavy-plan2-after.jpg" alt="颧骨手术效果" class="after-image">
+                                <!-- 图片位置：重度改造-颧骨手术效果图（整容前） -->
+                                <img src="assets/plans/heavy-plan2-before.jpg" alt="颧骨手术前" class="before-image">
+                                <label class="flip-icon" for="flip-heavy-plan2">
+                                    <i class="fas fa-sync-alt"></i>
+                                </label>
+                            </div>
+                            <div class="plan-info">
+                                <h4>颧骨内推手术</h4>
+                                <div class="plan-details">
+                                    <div class="detail-item">
+                                        <span class="label">预期效果</span>
+                                        <p>降低颧骨高度，改善颧弓外扩，使面部轮廓更柔和，减少面部突兀感。</p>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="label">风险等级</span>
+                                        <p>高。手术难度大，有出血、感染、面部下垂等风险。</p>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="label">恢复周期</span>
+                                        <p>3-6个月，长时间肿胀，后期逐渐恢复正常外观。</p>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="label">费用范围</span>
+                                        <p>¥35,000-80,000元</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <!-- 方案详情 -->
-            <div class="plan-details">
-                <div class="details-tabs">
-                    <button class="tab-button active" data-tab="description">方案说明</button>
-                    <button class="tab-button" data-tab="medical">医学解释</button>
-                    <button class="tab-button" data-tab="risks">风险提示</button>
-                </div>
-                <div class="tab-content">
-                    <div class="tab-pane active" id="description">
-                        <h4>方案说明</h4>
-                        <p>本方案通过精确的面部轮廓调整，为您打造完美的面部线条。采用先进的微创技术，确保手术效果自然持久。</p>
+            <!-- 3D效果预览区 -->
+            <div class="preview-section">
+                <h3>年龄模拟</h3>
+                <div class="age-simulation-container">
+                    <div class="age-slider-group">
+                        <label for="ageSlider">选择模拟年龄：</label>
+                        <input type="range" id="ageSlider" min="0" max="3" value="0" step="1">
+                        <div class="age-labels">
+                            <span>25岁</span>
+                            <span>35岁</span>
+                            <span>50岁</span>
+                            <span>70岁</span>
+                        </div>
                     </div>
-                    <div class="tab-pane" id="medical">
-                        <h4>医学解释</h4>
-                        <p>手术采用局部麻醉，通过微创切口进行面部轮廓调整。手术时间约2-3小时，恢复期约1-2周。</p>
-                    </div>
-                    <div class="tab-pane" id="risks">
-                        <h4>风险提示</h4>
-                        <ul>
-                            <li>可能出现暂时性肿胀和淤青</li>
-                            <li>极少数情况下可能出现感染</li>
-                            <li>需要严格遵医嘱进行术后护理</li>
-                        </ul>
+                    <div class="age-images">
+                        <!-- 只显示与滑块位置对应的图片，其余隐藏。默认显示25岁 -->
+                        <div class="age-image age-25 active">
+                            <!-- 图片位置：25岁整容后模拟图 -->
+                            <img src="assets/preview/age-25.jpg" alt="25岁整容后模拟图">
+                        </div>
+                        <div class="age-image age-35">
+                            <!-- 图片位置：35岁整容后模拟图 -->
+                            <img src="assets/preview/age-35.jpg" alt="35岁整容后模拟图">
+                        </div>
+                        <div class="age-image age-50">
+                            <!-- 图片位置：50岁整容后模拟图 -->
+                            <img src="assets/preview/age-50.jpg" alt="50岁整容后模拟图">
+                        </div>
+                        <div class="age-image age-70">
+                            <!-- 图片位置：70岁整容后模拟图 -->
+                            <img src="assets/preview/age-70.jpg" alt="70岁整容后模拟图">
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- 操作按钮 -->
-            <div class="action-buttons">
-                <button class="save-results">
-                    <i class="fas fa-download"></i>
-                    保存结果
-                </button>
-                <button class="share-results">
-                    <i class="fas fa-share-alt"></i>
-                    分享结果
-                </button>
-            </div>
         </div>
     </section>
 
@@ -281,12 +395,6 @@
             <div class="disclaimer">
                 <h3>免责声明</h3>
                 <p>本系统提供的分析结果和模拟效果仅供参考，实际效果可能因个人情况而异。建议在实施任何美容方案前咨询专业医师。</p>
-            </div>
-            <div class="faq">
-                <h3>常见问题</h3>
-                <div class="faq-list">
-                    <!-- FAQ内容将通过JavaScript动态填充 -->
-                </div>
             </div>
             <div class="professional-consultation">
                 <h3>专业咨询建议</h3>
