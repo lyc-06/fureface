@@ -349,17 +349,28 @@
                 <h3>年龄模拟</h3>
                 <div class="age-simulation-container">
                     <div class="age-slider-group">
-                        <label for="ageSlider">选择模拟年龄：</label>
-                        <input type="range" id="ageSlider" min="0" max="3" value="0" step="1">
+                        <h4>选择模拟年龄：</h4>
                         <div class="age-labels">
-                            <span>25岁</span>
-                            <span>35岁</span>
-                            <span>50岁</span>
-                            <span>70岁</span>
+                            <label>
+                                <input type="radio" name="age" class="age-radio" value="0" checked>
+                                <span>25岁</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="age" class="age-radio" value="1">
+                                <span>35岁</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="age" class="age-radio" value="2">
+                                <span>50岁</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="age" class="age-radio" value="3">
+                                <span>70岁</span>
+                            </label>
                         </div>
                     </div>
                     <div class="age-images">
-                        <div class="age-image age-25 active">
+                        <div class="age-image age-25">
                             <img src="assets/preview/age-25.jpg" alt="25岁整容后模拟图">
                         </div>
                         <div class="age-image age-35">
@@ -396,12 +407,6 @@
             </div>
         </div>
     </section>
-
-    <footer class="footer">
-        <div class="container">
-            <p>© 2024 AI面部特征分析系统 - 专业医疗美容解决方案</p>
-        </div>
-    </footer>
 
     <script src="script/script.js"></script>
 </body>
