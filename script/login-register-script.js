@@ -47,3 +47,16 @@ if (registerForm && document.querySelector('input[placeholder="确认密码"]'))
         }
     });
 }
+
+document.querySelector('form').addEventListener('submit', function(event) {
+    // 如果是注册页面，则拦截提交并显示确认弹窗
+    if (window.location.pathname.endsWith('register.html')) {
+        event.preventDefault(); // 阻止默认提交行为
+
+        const isConfirmed = confirm('注册成功！');
+        if (isConfirmed) {
+            window.location.href = 'login.html';
+        }
+    }
+    // 登录页面无需处理，保留原生提交行为（跳转 index.html）
+});
