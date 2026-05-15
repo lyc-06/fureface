@@ -1,0 +1,47 @@
+# MinIO配置
+minio:
+  endpoint: http://localhost:9000
+  access-key: xxxxxxxxxx
+  secret-key: xxxxxxxxxx
+  bucket: facefure
+
+# Redis配置
+spring:
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password: xxxxxxxxxxx
+      username: default
+      database: 0
+      lettuce:
+        pool:
+          max-active: 8
+          max-idle: 8
+          min-idle: 0
+          max-wait: -1ms
+  
+  # 邮件配置
+  mail:
+    host: smtp.qq.com
+    port: 465
+    username: xxxxxxxxxx@qq.com
+    password: xxxxxxxxxx
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          ssl:
+            enable: true
+
+# 阿里云短信配置
+aliyun:
+  sms:
+    access-key-id: xxxxxxxxxx
+    access-key-secret: xxxxxxxxxx
+    endpoint: dysmsapi.aliyuncs.com
+    sign-name: xxxxxxxxxx
+    template-code: xxxxxxxxxx

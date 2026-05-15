@@ -1,0 +1,12 @@
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+        username: xxxxxxxxxx
+        password: xxxxxxxxxx
+      config:
+        server-addr: localhost:8848
+        file-extension: yml
+        username: xxxxxxxxxx
+        password: xxxxxxxxxx

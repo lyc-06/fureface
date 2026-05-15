@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Fure-Face</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Element Plus 样式 -->
+  <link rel="stylesheet" href="https://unpkg.com/element-plus/dist/index.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- 删除阿里云验证码配置和样式 -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <div class="main-layout" v-if="currentPage === 'main'">
+      <!-- 侧边栏 -->
+      <div class="main-sider">
+        <div class="sider-avatar">
+          <el-avatar :size="36" :src="userInfo.avatar" class="user-avatar" />
+        </div>
+        <ul class="sider-menu">
+          <li v-for="item in navItems" :key="item.key" :class="{ active: navActive === item.key }" @click="navActive = item.key">
+            <i :class="item.icon"></i>
+            <div class="custom-tooltip">{{ item.label() }}</div>
+          </li>
+        </ul>
+        <div class="sider-logout">
+          <el-button circle @click="handleLogout">
+            <i class="fas fa-sign-out-alt"></i>
+          </el-button>
+        </div>
+      </div>
+
+      <!-- 主内容区 -->
+      <div class="main-content">
+        <div class="main-header">
+          <div class="main-title">{{ t('mainTitle') }}</div>
+          <div class="header-actions">
+            <el-select v-model="globalState.lang" style="width: 100px; margin-right: 16px;">
+              <el-option v-for="item in langOptions" :key="item.value" :label="item.label" :value="item.value" />
+            </el-select>
+            <el-select v-model="globalState.theme" style="width: 100px;">
+              <el-option v-for="item in themeOptions" :key="item.value" :label="item.label" :value="item.value" />
+            </el-select>
+          </div>
+        </div>
+
+        <div class="main-body">
+          <!-- 用户信息页面 -->
+          <template v-if="navActive === 'user'">
+            <div class="user-info-page">
+              <div class="user-card">
+                <!-- 头像部分 -->
+                <div class="user-avatar-box" @click="openAvatarCropper">
+                  <el-avatar :size="90" :src="userInfo.avatar" class="user-avatar" />
+                </div>
+
+                <!-- 基本信息部分 -->
+                <div class="user-section-title">基本信息</div>
+                <div class="user-form-row">
+                  <el-input v-model="userInfo.nickname" :placeholder="t('nickname')">
+                    <template #prepend>昵称：</template>
+                    <template #append>
+                      <button class="form-action-btn" @click="saveNickname">保存</button>
+                    </template>
+                  </el-input>
+                </div>
+                <div class="user-form-row">
+                  <el-input v-model="userInfo.phone" :placeholder="t('phone')" disabled>
+                    <template #prepend>手机号：</template>
+                  </el-input>
+                </div>
+                <div class="user-form-row">
+                  <el-input v-model="userInfo.email" :placeholder="t('email')" disabled>
+                    <template #prepend>邮箱：</template>
+                  </el-input>
+                </div>
+                <div class="user-form-row">
+                  <el-select v-model="userInfo.gender" style="width: 100%">
+                    <template #prefix>性别：</template>
+                    <el-option :label="t('genderMale')" value="男" />
+                    <el-option :label="t('genderFemale')" value="女" />
+                    <el-option :label="t('genderSecret')" value="保密" />
+                  </el-select>
+                </div>
+
+                <!-- 账号安全部分 -->
+                <div class="user-section-title">账号安全</div>
+                <div class="user-form-row">
+                  <el-input type="password" v-model="userInfo.password" placeholder="******" disabled style="width: 100%">
+                    <template #prepend>密码：</template>
+                    <template #append>
+                      <button class="form-action-btn" @click="startEditPassword">修改</button>
+                    </template>
+                  </el-input>
+                </div>
+
+                <!-- 账号绑定部分 -->
+                <div class="user-section-title">账号绑定</div>
+                <div class="user-bind-row">
+                  <div class="bind-label">
+                    <i class="fas fa-mobile-alt"></i>
+                    手机号
+                  </div>
+                  <div class="bind-status">
+                    {{ userInfo.phone ? userInfo.phone : '未绑定' }}
+                    <button class="form-action-btn" @click="startBindPhone">
+                      {{ userInfo.phone ? '换绑' : '绑定' }}
+                    </button>
+                  </div>
+                </div>
+                <div class="user-bind-row">
+                  <div class="bind-label">
+                    <i class="fas fa-envelope"></i>
+                    邮箱
+                  </div>
+                  <div class="bind-status">
+                    {{ userInfo.email ? userInfo.email : '未绑定' }}
+                    <button class="form-action-btn" @click="startBindEmail">
+                      {{ userInfo.email ? '换绑' : '绑定' }}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 修改密码弹窗 -->
+            <el-dialog
+              v-model="isEditingPassword"
+              title="修改密码"
+              width="400px"
+              custom-class="custom-message-box"
+              :close-on-click-modal="false"
+            >
+              <el-form>
+                <el-form-item>
+                  <el-input
+                    v-model="originalPassword"
+                    type="password"
+                    :placeholder="t('originalPassword')"
+                  />
+                </el-form-item>
+                <el-form-item>
+                  <el-input
+                    v-model="newPassword"
+                    type="password"
+                    :placeholder="t('newPassword')"
+                  />
+                </el-form-item>
+                <el-form-item>
+                  <el-input
+                    v-model="confirmNewPassword"
+                    type="password"
+                    :placeholder="t('confirmNewPassword')"
+                  />
+                </el-form-item>
+              </el-form>
+              <template #footer>
+                <span class="dialog-footer">
+                  <el-button @click="cancelEditPassword">取消</el-button>
+                  <el-button type="primary" @click="savePassword">确认</el-button>
+                </span>
+              </template>
+            </el-dialog>
+
+            <!-- 手机号换绑弹窗 -->
+            <el-dialog
+              v-model="isBindingPhone"
+              :title="userInfo.phone ? '换绑手机号' : '绑定手机号'"
+              width="400px"
+              custom-class="custom-message-box"
+              :close-on-click-modal="false"
+            >
+              <el-form>
+                <el-form-item>
+                  <el-input v-model="newPhone" placeholder="请输入新手机号">
+                    <template #append>
+                      <el-button
+                        @click="getVerifyCode('phone')"
+                        :disabled="codeBtnDisabled"
+                      >{{ codeBtnText }}</el-button>
+                    </template>
+                  </el-input>
+                </el-form-item>
+                <el-form-item>
+                  <el-input v-model="verifyCode" placeholder="请输入验证码" />
+                </el-form-item>
+              </el-form>
+              <template #footer>
+                <span class="dialog-footer">
+                  <el-button @click="cancelBindPhone">取消</el-button>
+                  <el-button type="primary" @click="savePhone">确认</el-button>
+                </span>
+              </template>
+            </el-dialog>
+
+            <!-- 邮箱换绑弹窗 -->
+            <el-dialog
+              v-model="isBindingEmail"
+              :title="userInfo.email ? '换绑邮箱' : '绑定邮箱'"
+              width="400px"
+              custom-class="custom-message-box"
+              :close-on-click-modal="false"
+            >
+              <el-form>
+                <el-form-item>
+                  <el-input v-model="newEmail" placeholder="请输入新邮箱">
+                    <template #append>
+                      <el-button
+                        @click="getVerifyCode('email')"
+                        :disabled="codeBtnDisabled"
+                      >{{ codeBtnText }}</el-button>
+                    </template>
+                  </el-input>
+                </el-form-item>
+                <el-form-item>
+                  <el-input v-model="verifyCode" placeholder="请输入验证码" />
+                </el-form-item>
+              </el-form>
+              <template #footer>
+                <span class="dialog-footer">
+                  <el-button @click="cancelBindEmail">取消</el-button>
+                  <el-button type="primary" @click="saveEmail">确认</el-button>
+                </span>
+              </template>
+            </el-dialog>
+
+            <!-- 头像裁剪弹窗 -->
+            <div v-if="showAvatarCropper" class="avatar-cropper-mask">
+              <div class="avatar-cropper-box">
+                <img :src="avatarPreview" class="avatar-cropper-preview" />
+                <div class="user-btn-row" style="margin-top: 24px;">
+                  <el-button @click="cancelAvatar">取消</el-button>
+                  <el-button type="primary" @click="saveAvatar">确认</el-button>
+                </div>
+              </div>
+            </div>
+          </template>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tech-dots"></div>
+  <!-- Vue 3 -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  <!-- Element Plus -->
+  <script src="https://unpkg.com/element-plus"></script>
+  <!-- Pinia 1.x UMD -->
+  <script src="https://unpkg.com/pinia@1.0.0-rc.7/dist/pinia.umd.js"></script>
+  <!-- 入口脚本 -->
+  <script src="main.js"></script>
+</body>
+</html> 

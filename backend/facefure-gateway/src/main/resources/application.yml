@@ -1,0 +1,65 @@
+server:
+  port: 9000
+
+spring:
+  application:
+    name: facefure-gateway
+  
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: user-service
+          uri: lb://facefure-user
+          predicates:
+            - Path=/api/v1/user/**
+          filters:
+            - StripPrefix=0
+            
+        - id: auth-service
+          uri: lb://facefure-auth
+          predicates:
+            - Path=/api/v1/auth/**
+          filters:
+            - StripPrefix=0
+            
+        - id: face-service
+          uri: lb://facefure-face
+          predicates:
+            - Path=/api/v1/face/**
+          filters:
+            - StripPrefix=0
+            
+        - id: ai-service
+          uri: lb://facefure-ai
+          predicates:
+            - Path=/api/v1/ai/**
+          filters:
+            - StripPrefix=0
+
+      # 跨域配置
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+            allowCredentials: true
+            
+      # 限流配置
+      default-filters:
+        - name: RequestRateLimiter
+          args:
+            key-resolver: "#{@ipKeyResolver}"
+            redis-rate-limiter.replenishRate: 10
+            redis-rate-limiter.burstCapacity: 20
+            redis-rate-limiter.requestedTokens: 1
+
+# 日志配置
+logging:
+  level:
+    org.springframework.cloud.gateway: debug
+    reactor.netty: debug
